@@ -100,7 +100,7 @@ function stage1grid() {
       let tempX = (tran * cos(radians(rotateVal))) + width / 2;
       let tempY = (tran * sin(radians(rotateVal))) + height / 2;
 
-      console.log(rotateVal);
+      //console.log(rotateVal);
 
       //lineLayer.circle(tempX, tempY, r); for testing only
 
@@ -145,7 +145,7 @@ function stage2grid() {
 
       r = r - (r/100);
 
-      console.log(rotateVal);
+      //console.log(rotateVal);
 
       //  lineLayer.circle(tempX, tempY, r-(i*lmax));
 
@@ -202,7 +202,7 @@ function stage3grid() {
 
       tempR = r*(1+int(random(0,2)));
 
-      console.log(rotateVal);
+      //console.log(rotateVal);
 
       //  lineLayer.circle(tempX, tempY, r-(i*lmax));
 
@@ -463,8 +463,8 @@ class Dot {
       this.s = colSat;
       this.b = colBri;
 
-      console.log(abs(colHue - this.h) > 180);
-      console.log(this.h);
+      //console.log(abs(colHue - this.h) > 180);
+      //console.log(this.h);
       copyLine();
     }
   }
