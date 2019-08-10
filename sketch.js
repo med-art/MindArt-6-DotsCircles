@@ -16,12 +16,6 @@ let shortEdge;
 
 let primaryArray = [360, 60, 240];
 
-let stage1array = [
-  [1, 1, 4, 1, 1, 3, 4, 3, 1, 5, 4, 5, 1, 7, 4, 7],
-  [1, 1, 2, 1, 3, 1, 4, 1, 1, 3, 4, 3, 1, 5, 4, 5, 1, 7, 2, 7, 3, 7, 4, 7],
-  [1, 1, 3, 1, 2, 2, 4, 2, 1, 3, 3, 3, 2, 4, 4, 4, 1, 5, 3, 5, 2, 6, 4, 6, 1, 7, 3, 7, 2, 8, 4, 8]
-];
-
 // NB stage 1 array is in a 4 x 8 grid system
 
 let colHue = 360,
@@ -35,16 +29,11 @@ let verifyX = 0;
 let verifyY = 0;
 
 function preload() {
-
   bg = loadImage('assets/paper.jpg');
-
   audio = loadSound('assets/audio.mp3');
-
 }
 
 function setup() {
-
-
   createCanvas(windowWidth, windowHeight);
   pixelDensity(1); // Ignores retina displays
   lineLayer = createGraphics(width, height);
@@ -143,7 +132,7 @@ function stage2grid() {
       let tempX = (tran * cos(radians(rotateVal))) + width / 2;
       let tempY = (tran * sin(radians(rotateVal))) + height / 2;
 
-      r = r - (r/100);
+      r = r - (r / 100);
 
       //console.log(rotateVal);
 
@@ -168,39 +157,41 @@ function stage3grid() {
     dotQty = 4;
     ringQty = 9;
     r = longEdge / 600;
-    gap = circleRad*0.5;
+  circleRad = shortEdge*0.8;
+    gap = circleRad * 0.6;
     remainder = circleRad - gap;
-  //  circleRad = shortEdge;
+
   }
 
   if (stage === 7) {
     dotQty = 4;
     ringQty = 12;
     r = longEdge / 600;
-    gap = circleRad*0.75;
+    circleRad = shortEdge*0.65
+    gap = circleRad * 0.75;
     remainder = circleRad - gap;
-  //  circleRad = shortEdge*0.75
   }
 
   if (stage === 8) {
     dotQty = 4;
     ringQty = 15;
     r = longEdge / 600;
+    circleRad = shortEdge*0.5
     gap = circleRad;
     remainder = circleRad - gap;
-  //  circleRad = shortEdge /2;
+
   }
 
   for (let i = 0; i < ringQty; i++) {
-    for (let j = 0; j < dotQty*(i+1); j++) {
+    for (let j = 0; j < dotQty * (i + 1); j++) {
 
-      let rotateVal = j * (360 / (dotQty*(i+1)));
-      let tran = (gap / ringQty) * (i)+remainder;
+      let rotateVal = j * (360 / (dotQty * (i + 1)));
+      let tran = (gap / ringQty) * (i) + remainder;
 
       let tempX = (tran * cos(radians(rotateVal))) + width / 2;
       let tempY = (tran * sin(radians(rotateVal))) + height / 2;
 
-      tempR = r*(1+int(random(0,2)));
+      tempR = r * (1 + int(random(0, 2)));
 
       //console.log(rotateVal);
 
@@ -225,7 +216,7 @@ function stage4grid() {
   if (stage === 9) {
     dotQty = 50;
     r = longEdge / 180;
-    gap = circleRad*0.9;
+    gap = circleRad * 0.9;
     remainder = circleRad - gap;
 
   }
@@ -233,7 +224,7 @@ function stage4grid() {
   if (stage === 10) {
     dotQty = 100;
     r = longEdge / 200;
-    gap = circleRad*0.7;
+    gap = circleRad * 0.7;
     remainder = circleRad - gap;
 
   }
@@ -241,14 +232,14 @@ function stage4grid() {
   if (stage === 11) {
     dotQty = 200;
     r = longEdge / 400;
-    gap = circleRad*0.5;
+    gap = circleRad * 0.5;
     remainder = circleRad - gap;
 
   }
 
   for (let i = 0; i < dotQty; i++) {
     let rotateVal = i * 137.5;
-    let tran = (((gap) / dotQty) * (i + 1))+remainder;
+    let tran = (((gap) / dotQty) * (i + 1)) + remainder;
 
     let tempX = (tran * cos(radians(rotateVal))) + width / 2;
     let tempY = (tran * sin(radians(rotateVal))) + height / 2;
@@ -269,49 +260,49 @@ function stage4grid() {
 
 function stage5grid() {
 
-    // at these are basic arrangements of grids
-    let r = longEdge / 100;
+  // at these are basic arrangements of grids
+  let r = longEdge / 100;
 
-    dotsCount = 0;
+  dotsCount = 0;
 
-    if (stage === 12) {
-      dotQty = 1000;
-      r = longEdge / 1500;
-      circleRad = circleRad;
-    }
+  if (stage === 12) {
+    dotQty = 1000;
+    r = longEdge / 1500;
+    circleRad = circleRad;
+  }
 
-    if (stage === 13) {
-      dotQty = 1000;
-      r = longEdge / 1000;
-        circleRad = circleRad*1.5;
-    }
+  if (stage === 13) {
+    dotQty = 1000;
+    r = longEdge / 1000;
+    circleRad = circleRad * 1.5;
+  }
 
-    if (stage === 14) {
-      dotQty = 1000;
-      r = longEdge / 750;
-      circleRad = circleRad*2;
-      writeRestartUI();
+  if (stage === 14) {
+    dotQty = 1000;
+    r = longEdge / 750;
+    circleRad = circleRad * 2;
+    writeRestartUI();
 
-    }
+  }
 
-    for (let i = 0; i < dotQty; i++) {
-      let rotateVal = i * 137.5;
-      let tran = (((circleRad*0.8) / dotQty) * (i + 1))+circleRad*0.2;
+  for (let i = 0; i < dotQty; i++) {
+    let rotateVal = i * 137.5;
+    let tran = (((circleRad * 0.8) / dotQty) * (i + 1)) + circleRad * 0.2;
 
-      let tempX = (tran * cos(radians(rotateVal))) + width / 2;
-      let tempY = (tran * sin(radians(rotateVal))) + height / 2;
+    let tempX = (tran * cos(radians(rotateVal))) + width / 2;
+    let tempY = (tran * sin(radians(rotateVal))) + height / 2;
 
-      r = r + r/1000;
-      let tempRad = random(r*0.5, r*2.5)
-
-
-
-      //  lineLayer.circle(tempX, tempY, r-(i*lmax));
-
-      dots[dotsCount++] = new Dot(tempX, tempY, tempRad);
+    r = r + r / 1000;
+    let tempRad = random(r * 0.5, r * 2.5)
 
 
-    }
+
+    //  lineLayer.circle(tempX, tempY, r-(i*lmax));
+
+    dots[dotsCount++] = new Dot(tempX, tempY, tempRad);
+
+
+  }
 
 
 
@@ -329,11 +320,11 @@ function nextGrid() {
     stage2grid();
   } else if (stage >= 6 && stage < 9) {
     stage3grid();
-  } else if (stage >= 9 && stage < 12){
+  } else if (stage >= 9 && stage < 12) {
     stage4grid();
-} else if (stage >= 12){
-  stage5grid();
-}
+  } else if (stage >= 12) {
+    stage5grid();
+  }
 
 
   stage++;
@@ -415,7 +406,7 @@ class Dot {
     this.brightness = 150;
     this.h = primaryArray[int(random(0, 3))];
     this.s = 0;
-    this.b = random(30,225);
+    this.b = random(30, 225);
   }
 
   show() {
@@ -427,7 +418,6 @@ class Dot {
     ellipse(this.x, this.y, this.r * 2);
     fill(this.h, this.s, this.b / 1, 100);
     ellipse(this.x, this.y, this.r * 1);
-
   }
 
   getCol(x, y) {
@@ -438,9 +428,6 @@ class Dot {
   }
 
   clicked(x, y) {
-
-
-
 
     let d = dist(x, y, this.x, this.y);
     if (d < this.r * 4 && (this.x != verifyX || this.y != verifyY)) {
@@ -462,12 +449,7 @@ class Dot {
       colHue = this.h;
       this.s = colSat;
       this.b = colBri;
-
-      //console.log(abs(colHue - this.h) > 180);
-      //console.log(this.h);
       copyLine();
     }
   }
-
-
 }
