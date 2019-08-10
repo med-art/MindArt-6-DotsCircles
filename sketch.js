@@ -7,22 +7,14 @@ let lineLayer, permaLine;
 let dotSize = 4;
 let dotQty = 20;
 let ringQty = 0;
-let spaceX, spaceY;
-let noiseAmplification = 0;
 let hueDrift, brightDrift, satDrift;
 let throughDotCount = 0;
-
-let shortEdge;
-
+let longEdge, shortEdge, circleRad, lmax, wmax, hmax;
 let primaryArray = [360, 60, 240];
-
-// NB stage 1 array is in a 4 x 8 grid system
-
 let colHue = 360,
   colSat = 100,
   colBri = 100;
 let stage = 0;
-
 let dotsCount = 0;
 let hueCapture = 0;
 let verifyX = 0;
@@ -44,8 +36,6 @@ function setup() {
   dimensionCalc();
   writeTextUI();
   nextGrid();
-  //stage3grid(2,2,0);
-
 }
 
 function dimensionCalc() {
@@ -71,38 +61,27 @@ function stage1grid() {
   if (stage === 0) {
     dotQty = 5;
   }
-
   if (stage === 1) {
     dotQty = 10;
   }
-
   if (stage === 2) {
     dotQty = 20;
   }
 
   for (let i = 0; i < ringQty; i++) {
     for (let j = 0; j < dotQty; j++) {
-
       let rotateVal = j * (360 / dotQty);
       let tran = (circleRad / ringQty) * (i + 1);
-
       let tempX = (tran * cos(radians(rotateVal))) + width / 2;
       let tempY = (tran * sin(radians(rotateVal))) + height / 2;
-
-      //console.log(rotateVal);
-
-      //lineLayer.circle(tempX, tempY, r); for testing only
-
       dots[dotsCount++] = new Dot(tempX, tempY, r);
-
     }
+
   }
 }
 
 function stage2grid() {
-  // at these are basic arrangements of grids
   let r = longEdge / 100;
-
   dotsCount = 0;
 
   if (stage === 3) {
@@ -309,11 +288,7 @@ function stage5grid() {
 }
 
 function nextGrid() {
-
-  // note stages are 3 sets of 3. i.e. [0, 1, 2],[3, 4, 5],[6, 7, 8]
   permaLine.clear();
-
-
   if (stage < 3) {
     stage1grid();
   } else if (stage >= 3 && stage < 6) {
@@ -325,11 +300,7 @@ function nextGrid() {
   } else if (stage >= 12) {
     stage5grid();
   }
-
-
   stage++;
-
-
 }
 
 function draw() {
