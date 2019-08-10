@@ -62,7 +62,7 @@ function stage1grid() {
 
 
   if (stage === 0) {
-    dotQty = 5;
+    dotQty = 7;
   }
   if (stage === 1) {
     dotQty = 10;
@@ -94,7 +94,7 @@ function stage2grid() {
   }
 
   if (stage === 4) {
-    dotQty = 5;
+    dotQty = 7;
     ringQty = 3;
     r = longEdge / 150;
   }
@@ -136,38 +136,38 @@ function stage3grid() {
   dotsCount = 0;
 
   if (stage === 6) {
-    dotQty = 4;
-    ringQty = 9;
-    r = longEdge / 600;
-  circleRad = shortEdge*0.7;
-    gap = circleRad * 0.6;
+    dotQty = 7;
+    ringQty =11;
+    r = longEdge / 300;
+  circleRad = shortEdge*1;
+    gap = circleRad*0.7;
     remainder = circleRad - gap;
 
   }
 
   if (stage === 7) {
-    dotQty = 4;
-    ringQty = 12;
-    r = longEdge / 600;
-    circleRad = shortEdge*0.6
-    gap = circleRad * 0.75;
+    dotQty = 7;
+    ringQty = 14;
+    r = longEdge / 450;
+    circleRad = shortEdge*0.75;
+    gap = circleRad*0.8;
     remainder = circleRad - gap;
   }
 
   if (stage === 8) {
-    dotQty = 4;
-    ringQty = 15;
+    dotQty = 7;
+    ringQty = 17;
     r = longEdge / 600;
     circleRad = shortEdge*0.5
-    gap = circleRad;
+    gap = circleRad*0.95;
     remainder = circleRad - gap;
 
   }
 
   for (let i = 0; i < ringQty; i++) {
-    for (let j = 0; j < dotQty * (i + 1); j++) {
+    for (let j = 0; j < dotQty * (i); j++) {
 
-      let rotateVal = j * (360 / (dotQty * (i + 1)));
+      let rotateVal = j * (360 / (dotQty * (i)));
       let tran = (gap / ringQty) * (i) + remainder;
 
       let tempX = (tran * cos(radians(rotateVal))) + width / 2;
