@@ -50,6 +50,7 @@ function dimensionCalc() {
     longEdge = height;
     shortEdge = width;
     lmax = height / 100;
+    circleRad = shortEdge * 0.45;
   }
 }
 
