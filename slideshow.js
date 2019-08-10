@@ -17,6 +17,6 @@ function showIntro() {
 function exitIntro() {
   writeTextUI();
   nextGrid();
-  audio.loop();
+
   introState = 0;
 }

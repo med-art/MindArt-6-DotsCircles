@@ -323,6 +323,7 @@ function touchStarted() {
 
 if (introState === 1 && textStroke === 80){
   exitIntro();
+  audio.loop();
 }
 else {
   for (let i = 0; i < dotsCount; i++) {
