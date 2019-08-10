@@ -4,8 +4,6 @@ let textStroke2 = 0;
 function showIntro() {
   image(bg, 0, 0, width, height);
   textSize(lmax * 5);
-
-
   textAlign(CENTER);
   text("Circular Dotscape", width / 2, height * 0.4);
   textSize(lmax * 3.5);
@@ -19,6 +17,6 @@ function showIntro() {
 function exitIntro() {
   writeTextUI();
   nextGrid();
-  audio.play();
+  audio.loop();
   introState = 0;
 }
