@@ -139,7 +139,7 @@ function stage3grid() {
     dotQty = 4;
     ringQty = 9;
     r = longEdge / 600;
-  circleRad = shortEdge*0.8;
+  circleRad = shortEdge*0.7;
     gap = circleRad * 0.6;
     remainder = circleRad - gap;
 
@@ -149,7 +149,7 @@ function stage3grid() {
     dotQty = 4;
     ringQty = 12;
     r = longEdge / 600;
-    circleRad = shortEdge*0.65
+    circleRad = shortEdge*0.6
     gap = circleRad * 0.75;
     remainder = circleRad - gap;
   }
