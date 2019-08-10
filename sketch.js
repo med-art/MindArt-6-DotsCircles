@@ -20,6 +20,8 @@ let hueCapture = 0;
 let verifyX = 0;
 let verifyY = 0;
 
+let introState = 1;
+
 function preload() {
   bg = loadImage('assets/paper.jpg');
   audio = loadSound('assets/audio.mp3');
@@ -34,8 +36,7 @@ function setup() {
   lineLayer.colorMode(HSB, 360, 100, 100, 100);
   permaLine.colorMode(HSB, 360, 100, 100, 100);
   dimensionCalc();
-  writeTextUI();
-  nextGrid();
+  showIntro();
 }
 
 function dimensionCalc() {
@@ -58,6 +59,7 @@ function stage1grid() {
   let r = longEdge / 100;
   ringQty = 1;
   dotsCount = 0;
+
 
   if (stage === 0) {
     dotQty = 5;
@@ -305,35 +307,35 @@ function nextGrid() {
 }
 
 function draw() {
+
+if (introState === 0){
   image(bg, 0, 0, width, height);
-
-
   image(lineLayer, 0, 0);
   image(permaLine, 0, 0);
   for (let i = 0; i < dotsCount; i++) {
     dots[i].show();
   }
+}
 
 }
 
 function touchStarted() {
 
+if (introState === 1 && textStroke === 80){
+  exitIntro();
+}
+else {
   for (let i = 0; i < dotsCount; i++) {
     dots[i].getCol(winMouseX, winMouseY);
   }
 
 
-  if (audio.isPlaying()) {
-
-  } else {
-    //audio.play();
-  }
 
   // let swatchTemp = int(random(0, 5));
   // colHue = cloudHSB[swatchTemp][0];
   // colSat = cloudHSB[swatchTemp][1];
   // colBri = cloudHSB[swatchTemp][2];
-
+}
 }
 
 

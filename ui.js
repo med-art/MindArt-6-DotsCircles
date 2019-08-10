@@ -45,13 +45,15 @@ function writeRestartUI() {
   button2.style('border-radius', '2.5vmax')
   button2.style('width', '15vmax')
   button2.mousePressed(restart);
-
 }
 
 
 function restart() {
   stage = 0;
-  setup();
+  introState = 0;
+  dimensionCalc();
+  writeTextUI();
+  nextGrid();
 
 }
 
