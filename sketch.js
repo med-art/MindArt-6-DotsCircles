@@ -321,7 +321,7 @@ if (introState === 0){
 
 function touchStarted() {
 
-if (introState === 1 && textStroke === 80){
+if (introState === 1 && textStroke === 10){
   exitIntro();
   audio.loop();
 }
