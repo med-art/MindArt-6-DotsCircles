@@ -387,12 +387,12 @@ class Dot {
   show() {
 
     noStroke();
-    fill(this.h, this.s, this.b * 0.6, 100);
+    fill(this.h, this.s, this.b * 0.9, 100);
     ellipse(this.x, this.y, this.r * 3);
     fill(this.h, this.s, this.b * 0.8, 100);
+    ellipse(this.x, this.y, this.r * 2.5);
+    fill(this.h, this.s, this.b * 0.7, 100);
     ellipse(this.x, this.y, this.r * 2);
-    fill(this.h, this.s, this.b / 1, 100);
-    ellipse(this.x, this.y, this.r * 1);
   }
 
   getCol(x, y) {
