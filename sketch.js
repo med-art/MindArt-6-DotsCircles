@@ -398,14 +398,9 @@ class Dot {
   getCol(x, y) {
     let d = dist(x, y, this.x, this.y);
     if (d < this.r * 4 && (this.x != verifyX || this.y != verifyY)) {
-      if (colHue != this.h) {
-        if (abs(colHue - this.h) > 280) {
-          this.h = (((this.h + colHue) / 2) - 180) % 360;;
-        } else {
-          this.h = ((this.h + colHue) / 2) % 360;;
-        }
-      }
+
       colHue = this.h;
+      this.s = 255;
     }
   }
 
