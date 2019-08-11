@@ -323,7 +323,7 @@ function touchStarted() {
 
 if (introState === 1 && textStroke === 10){
   exitIntro();
-  audio.loop();
+  // audio.loop();
 }
 else {
   for (let i = 0; i < dotsCount; i++) {
@@ -381,7 +381,7 @@ class Dot {
     this.brightness = 150;
     this.h = primaryArray[int(random(0, 3))];
     this.s = 0;
-    this.b = random(30, 225);
+    this.b = random(0, 180);
   }
 
   show() {
@@ -398,6 +398,13 @@ class Dot {
   getCol(x, y) {
     let d = dist(x, y, this.x, this.y);
     if (d < this.r * 4 && (this.x != verifyX || this.y != verifyY)) {
+      if (colHue != this.h) {
+        if (abs(colHue - this.h) > 280) {
+          this.h = (((this.h + colHue) / 2) - 180) % 360;;
+        } else {
+          this.h = ((this.h + colHue) / 2) % 360;;
+        }
+      }
       colHue = this.h;
     }
   }
