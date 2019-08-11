@@ -381,7 +381,7 @@ class Dot {
     this.brightness = 150;
     this.h = primaryArray[int(random(0, 3))];
     this.s = 0;
-    this.b = random(55, 195);
+    this.b = random(45, 195);
   }
 
   show() {
