@@ -95,12 +95,12 @@ dots = [];
       dotQtyX = 7;
       dotQtyY = 9;
       r = longEdge/30;
-      let spaceX = width/dotQtyX+1;
-      let spaceY = height/dotQtyY+1;
+      let spaceX = width/dotQtyX+2;
+      let spaceY = height/dotQtyY+2;
 
       for (let i = 0; i < dotQtyX; i++) {
           for (let j = 0; j < dotQtyY; j++) {
-          dots[dotsCount++] = new Dot((i+1)*(spaceX), (j+0.5)*(spaceY), 12);
+          dots[dotsCount++] = new Dot((i+1)*(spaceX), (j+1)*(spaceY), 12);
         }
       }
     }
