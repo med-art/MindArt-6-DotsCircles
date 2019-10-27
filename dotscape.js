@@ -21,6 +21,8 @@ let verifyX = 0;
 let verifyY = 0;
 let tintedBG;
 
+let rMultiplier = 1;
+
 let introState = 1;
 
 let stage1array = [
@@ -288,7 +290,7 @@ dotsCount = 0;
     x = 7;
     y = 7;
     noiseAmp = 8;
-    dotSize =4;
+    dotSize = 5;
   //  colToggleUI();
   }
 
@@ -312,8 +314,8 @@ dotsCount = 0;
 
     }
     noiseAmp+=10;
-    x+=10;
-    y+=10;
+    x+=5;
+    y+=5;
     dotSize--;
 
 
@@ -440,7 +442,15 @@ class Dot {
   clicked(x, y) {
 
     let d = dist(x, y, this.x, this.y);
-    if (d < this.r * 2.2 && (this.x != verifyX || this.y != verifyY)) {
+
+    if (throughDotCount === 0){
+      rMultiplier = 4; // increase radius for first grab
+    }
+    else {
+      rMultiplier = 1;
+    }
+
+    if (d < this.r * 2.05 * rMultiplier && (this.x != verifyX || this.y != verifyY)) {
       verifyX = this.x;
       verifyY = this.y;
       tempwinMouseX2 = tempwinMouseX;
