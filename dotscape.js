@@ -19,8 +19,15 @@ let dotsCount = 0;
 let hueCapture = 0;
 let verifyX = 0;
 let verifyY = 0;
+let tintedBG;
 
 let introState = 1;
+
+let stage1array = [
+  [1, 1, 4, 1, 1, 3, 4, 3, 1, 5, 4, 5, 1, 7, 4, 7],
+  [1, 1, 2, 1, 3, 1, 4, 1, 1, 3, 4, 3, 1, 5, 4, 5, 1, 7, 2, 7, 3, 7, 4, 7],
+  [1, 1, 3, 1, 2, 2, 4, 2, 1, 3, 3, 3, 2, 4, 4, 4, 1, 5, 3, 5, 2, 6, 4, 6, 1, 7, 3, 7, 2, 8, 4, 8]
+];
 
 function preload() {
   bg = loadImage('assets/paper.jpg');
@@ -32,6 +39,7 @@ function setup() {
   pixelDensity(1); // Ignores retina displays
   lineLayer = createGraphics(width, height);
   permaLine = createGraphics(width, height);
+  tintedBG = createGraphics(width, height);
   colorMode(HSB, 360, 100, 100, 100);
   lineLayer.colorMode(HSB, 360, 100, 100, 100);
   permaLine.colorMode(HSB, 360, 100, 100, 100);
@@ -55,20 +63,92 @@ function dimensionCalc() {
   }
 }
 
-function stage1grid() {
+function stage0grid() {
+
+
+  dotsCount = 0;
+  dots = [];
+
+  let w = width / 5;
+  let h = height / 9;
+  let r = longEdge / 50;
+
+  dotQtyX = 1;
+  dotQtyY = stage1array[stage].length / 2;
+
+
+
+  for (let i = 0; i < stage1array[stage].length; i += 2) {
+    dots[dotsCount++] = new Dot(stage1array[stage][i] * w, stage1array[stage][i + 1] * h, r);
+  }
+}
+
+function stage1grid(){
+
+dotsCount = 0;
+dots = [];
+
+    if (stage === 3) {
+
+      dotQtyX = 7;
+      dotQtyY = 9;
+      r = longEdge/30;
+      let spaceX = width/dotQtyX+1;
+      let spaceY = height/dotQtyY+1;
+
+      for (let i = 0; i < dotQtyX; i++) {
+          for (let j = 0; j < dotQtyY; j++) {
+          dots[dotsCount++] = new Dot((i+1)*(spaceX), (j+1)*(spaceY), 12);
+        }
+      }
+    }
+
+  else if (stage === 4) {
+      dotQtyX = 2;
+      dotQtyY = 5*4;
+      r = longEdge/30;
+      let spaceX = width/dotQtyX+1;
+      let spaceY = height/dotQtyY+1;
+
+      for (let i = 0; i < dotQtyX; i++) {
+          for (let j = 0; j < dotQtyY; j+=4) {
+          dots[dotsCount++] = new Dot(((i+0.5)*(spaceX))-(spaceX/6), (j+0.5)*(spaceY), 11);
+          dots[dotsCount++] = new Dot(((i+0.5)*(spaceX))+(spaceX/6), (j+0.5)*(spaceY), 11);
+          dots[dotsCount++] = new Dot(((i+0.5)*(spaceX))-(spaceX/3), (j+0.5)*(spaceY)+(spaceY*2), 11);
+          dots[dotsCount++] = new Dot(((i+0.5)*(spaceX))+((spaceX/6)*2), (j+0.5)*(spaceY)+(spaceY*2), 11);
+        }
+      }
+    }
+
+    else if (stage === 5) {
+      dotQtyX = 4;
+      dotQtyY = 13*4;
+      r = longEdge/30;
+      let spaceX = width/dotQtyX+1;
+      let spaceY = height/dotQtyY+1;
+
+      for (let i = 0; i < dotQtyX; i++) {
+          for (let j = 0; j < dotQtyY; j+=4) {
+          dots[dotsCount++] = new Dot(((i+0.5)*(spaceX))-(spaceX/6), (j+0.5)*(spaceY), 8);
+          dots[dotsCount++] = new Dot(((i+0.5)*(spaceX))+(spaceX/6), (j+0.5)*(spaceY), 8);
+          dots[dotsCount++] = new Dot(((i+0.5)*(spaceX))-(spaceX/3), (j+0.5)*(spaceY)+(spaceY*2), 8);
+          dots[dotsCount++] = new Dot(((i+0.5)*(spaceX))+((spaceX/6)*2), (j+0.5)*(spaceY)+(spaceY*2), 8);
+        }
+      }
+    }
+}
+
+function stage2grid() {
   let r = longEdge / 100;
   ringQty = 1;
   dotsCount = 0;
 
 
-  if (stage === 0) {
+  if (stage === 6) {
     dotQty = 7;
   }
-  if (stage === 1) {
+  if (stage === 7) {
     dotQty = 10;
-  }
-  if (stage === 2) {
-    dotQty = 20;
   }
 
   for (let i = 0; i < ringQty; i++) {
@@ -83,25 +163,13 @@ function stage1grid() {
   }
 }
 
-function stage2grid() {
+function stage3grid() {
   let r = longEdge / 100;
   dotsCount = 0;
 
-  if (stage === 3) {
-    dotQty = 3;
-    ringQty = 2;
-    r = longEdge / 100;
-  }
-
-  if (stage === 4) {
+  if (stage === 8) {
     dotQty = 7;
     ringQty = 3;
-    r = longEdge / 150;
-  }
-
-  if (stage === 5) {
-    dotQty = 3;
-    ringQty = 10;
     r = longEdge / 150;
   }
 
@@ -128,64 +196,6 @@ function stage2grid() {
 
 }
 
-function stage3grid() {
-  // at these are basic arrangements of grids
-  let r = longEdge / 100;
-  let tempR;
-
-  dotsCount = 0;
-
-  if (stage === 6) {
-    dotQty = 7;
-    ringQty =11;
-    r = longEdge / 300;
-  circleRad = shortEdge*1;
-    gap = circleRad*0.7;
-    remainder = circleRad - gap;
-
-  }
-
-  if (stage === 7) {
-    dotQty = 7;
-    ringQty = 14;
-    r = longEdge / 450;
-    circleRad = shortEdge*0.75;
-    gap = circleRad*0.8;
-    remainder = circleRad - gap;
-  }
-
-  if (stage === 8) {
-    dotQty = 7;
-    ringQty = 17;
-    r = longEdge / 600;
-    circleRad = shortEdge*0.5
-    gap = circleRad*0.95;
-    remainder = circleRad - gap;
-
-  }
-
-  for (let i = 0; i < ringQty; i++) {
-    for (let j = 0; j < dotQty * (i); j++) {
-
-      let rotateVal = j * (360 / (dotQty * (i)));
-      let tran = (gap / ringQty) * (i) + remainder;
-
-      let tempX = (tran * cos(radians(rotateVal))) + width / 2;
-      let tempY = (tran * sin(radians(rotateVal))) + height / 2;
-
-      tempR = r * (1 + int(random(0, 2)));
-
-      //console.log(rotateVal);
-
-      //  lineLayer.circle(tempX, tempY, r-(i*lmax));
-
-      dots[dotsCount++] = new Dot(tempX, tempY, tempR);
-
-    }
-  }
-
-
-}
 
 function stage4grid() {
   // at these are basic arrangements of grids
@@ -207,14 +217,6 @@ function stage4grid() {
     dotQty = 100;
     r = longEdge / 200;
     gap = circleRad * 0.7;
-    remainder = circleRad - gap;
-
-  }
-
-  if (stage === 11) {
-    dotQty = 200;
-    r = longEdge / 400;
-    gap = circleRad * 0.5;
     remainder = circleRad - gap;
 
   }
@@ -247,23 +249,11 @@ function stage5grid() {
 
   dotsCount = 0;
 
-  if (stage === 12) {
-    dotQty = 1000;
-    r = longEdge / 1500;
-    circleRad = circleRad;
-  }
-
-  if (stage === 13) {
-    dotQty = 1000;
-    r = longEdge / 1000;
-    circleRad = circleRad * 1.5;
-  }
-
-  if (stage === 14) {
+  if (stage === 11) {
     dotQty = 1000;
     r = longEdge / 750;
     circleRad = circleRad * 2;
-    writeRestartUI();
+
 
   }
 
@@ -290,53 +280,96 @@ function stage5grid() {
 
 }
 
+function stage6grid(){
+
+dotsCount = 0;
+
+  if (stage === 12){
+    x = 7;
+    y = 7;
+    noiseAmp = 8;
+    dotSize =4;
+  //  colToggleUI();
+  }
+
+  else if (stage === 14){
+    writeRestartUI();
+  }
+
+
+    dotQtyX = x;
+    dotQtyY = y;
+    spaceX = width / (dotQtyX + 2);
+    spaceY = height / (dotQtyY + 2);
+
+    for (let i = 0; i < dotQtyX; i++) {
+        for (let j = 0; j < dotQtyY; j++) {
+        let noiseX = int((random(-width, width) * noiseAmp) / 150);
+        let noiseY = int((random(-height, height) * noiseAmp) / 150);
+        let r = random((lmax*(dotSize/10)), (lmax*(dotSize/10)) * 2);
+        dots[dotsCount++] = new Dot(noiseX + (spaceX * 1.5) + (spaceX * i), noiseY + (spaceY * 1.5) + (spaceY * j), r);
+      }
+
+    }
+    noiseAmp+=10;
+    x+=10;
+    y+=10;
+    dotSize--;
+
+
+}
+
+
 function nextGrid() {
   permaLine.clear();
+
   if (stage < 3) {
+    stage0grid();
+  } else if  (stage >= 3 && stage < 6){
     stage1grid();
-  } else if (stage >= 3 && stage < 6) {
+  } else if (stage >= 6 && stage < 8) {
     stage2grid();
-  } else if (stage >= 6 && stage < 9) {
+  } else if (stage >= 8 && stage < 9) {
     stage3grid();
-  } else if (stage >= 9 && stage < 12) {
+  } else if (stage >= 9 && stage < 11) {
     stage4grid();
-  } else if (stage >= 12) {
+  } else if (stage >= 11 && stage < 12) {
     stage5grid();
+  } else if (stage >= 12 && stage < 15){
+    stage6grid();
   }
+
+  tintedBG.tint(255-(20*stage));
+  tintedBG.image(bg, 0, 0, width, height);
+
   stage++;
 }
 
 function draw() {
 
-if (introState === 0){
-  image(bg, 0, 0, width, height);
-  image(lineLayer, 0, 0);
-  image(permaLine, 0, 0);
-  for (let i = 0; i < dotsCount; i++) {
-    dots[i].show();
+  if (introState === 0) {
+    image(tintedBG, 0, 0, width, height);
+    image(lineLayer, 0, 0);
+    image(permaLine, 0, 0);
+    for (let i = 0; i < dotsCount; i++) {
+      dots[i].show();
+    }
   }
-}
 
 }
 
 function touchStarted() {
 
-if (introState === 1 && textStroke === 10){
-  exitIntro();
-   audio.loop();
-}
-else {
-  for (let i = 0; i < dotsCount; i++) {
-    dots[i].getCol(winMouseX, winMouseY);
+  if (introState === 1 && textStroke === 10) {
+    exitIntro();
+    audio.loop();
+  } else {
+    for (let i = 0; i < dotsCount; i++) {
+      dots[i].getCol(winMouseX, winMouseY);
+    }
+
+
   }
-
-
-
-  // let swatchTemp = int(random(0, 5));
-  // colHue = cloudHSB[swatchTemp][0];
-  // colSat = cloudHSB[swatchTemp][1];
-  // colBri = cloudHSB[swatchTemp][2];
-}
 }
 
 
@@ -407,7 +440,7 @@ class Dot {
   clicked(x, y) {
 
     let d = dist(x, y, this.x, this.y);
-    if (d < this.r * 4 && (this.x != verifyX || this.y != verifyY)) {
+    if (d < this.r * 2.2 && (this.x != verifyX || this.y != verifyY)) {
       verifyX = this.x;
       verifyY = this.y;
       tempwinMouseX2 = tempwinMouseX;
