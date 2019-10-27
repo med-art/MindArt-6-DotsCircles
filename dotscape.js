@@ -100,7 +100,7 @@ dots = [];
 
       for (let i = 0; i < dotQtyX; i++) {
           for (let j = 0; j < dotQtyY; j++) {
-          dots[dotsCount++] = new Dot((i+1)*(spaceX), (j+1)*(spaceY), 12);
+          dots[dotsCount++] = new Dot((i+1)*(spaceX), (j+0.5)*(spaceY), 12);
         }
       }
     }
