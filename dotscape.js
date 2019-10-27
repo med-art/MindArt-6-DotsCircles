@@ -341,8 +341,10 @@ function nextGrid() {
     stage6grid();
   }
 
-  tintedBG.tint(255-(20*stage));
+//  tintedBG.tint(255-(20*stage));
   tintedBG.image(bg, 0, 0, width, height);
+  tintedBG.fill(0, (20*stage));
+  tintedBG.rect(0,0,width,height);
 
   stage++;
 }
