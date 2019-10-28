@@ -15,14 +15,14 @@ function writeTextUI() {
   nextButton = createButton('Next');
   nextButton.style('font-size', '2.6vmax');
   nextButton.style('height', '4.5vmax');
-  nextButton.position(width - (15 * lmax), height - (6.5 * lmax));
+  nextButton.position(width - (15 * vMax), height - (6.5 * vMax));
   nextButton.class("select");
   nextButton.mousePressed(nextGrid);
 
   saveButton = createButton('Save');
   saveButton.style('font-size', '2.6vmax');
   saveButton.style('height', '4.5vmax');
-  saveButton.position(width - (15 * lmax), height - (12.5 * lmax));
+  saveButton.position(width - (15 * vMax), height - (12.5 * vMax));
   saveButton.class("select");
   saveButton.mousePressed(saveImage);
 }
@@ -38,7 +38,7 @@ function writeRestartUI() {
   nextButton = createButton('Restart');
   nextButton.style('font-size', '2.6vmax');
   nextButton.style('height', '4.5vmax');
-  nextButton.position(width - (15 * lmax), height - (6.5 * lmax));
+  nextButton.position(width - (15 * vMax), height - (6.5 * vMax));
   nextButton.class("select");
   nextButton.style('background-color', 'indianred');
   nextButton.mousePressed(restart);
@@ -66,7 +66,7 @@ function colToggleUI() {
 
 
   button1 = createButton('White');
-  button1.position((lmax * 3), windowHeight - lmax * 5);
+  button1.position((vMax * 3), windowHeight - vMax * 5);
   colH1 = color(355, 70, 80);
   button1.style('background-color', colH1);
   button1.style('font-size', '2.5vmax');

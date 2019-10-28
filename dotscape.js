@@ -9,7 +9,7 @@ let dotQty = 20;
 let ringQty = 0;
 let hueDrift, brightDrift, satDrift;
 let throughDotCount = 0;
-let longEdge, shortEdge, circleRad, lmax, wmax, hmax;
+let longEdge, shortEdge, circleRad, vMax, wmax, hmax;
 let primaryArray = [360, 60, 240];
 let colHue = 360,
   colSat = 100,
@@ -23,7 +23,6 @@ let tintedBG;
 
 let rMultiplier = 1;
 
-let introState = 1;
 
 let stage1array = [
   [1, 1, 4, 1, 1, 3, 4, 3, 1, 5, 4, 5, 1, 7, 4, 7],
@@ -46,7 +45,9 @@ function setup() {
   lineLayer.colorMode(HSB, 360, 100, 100, 100);
   permaLine.colorMode(HSB, 360, 100, 100, 100);
   dimensionCalc();
-  showIntro();
+
+  textLayer = createGraphics(windowWidth, windowHeight);
+  slideShow();
 }
 
 function dimensionCalc() {
@@ -56,11 +57,11 @@ function dimensionCalc() {
     longEdge = width;
     shortEdge = height;
     circleRad = shortEdge * 0.45;
-    lmax = width / 100;
+    vMax = width / 100;
   } else {
     longEdge = height;
     shortEdge = width;
-    lmax = height / 100;
+    vMax = height / 100;
     circleRad = shortEdge * 0.45;
   }
 }
@@ -188,7 +189,7 @@ function stage3grid() {
 
       //console.log(rotateVal);
 
-      //  lineLayer.circle(tempX, tempY, r-(i*lmax));
+      //  lineLayer.circle(tempX, tempY, r-(i*vMax));
 
       dots[dotsCount++] = new Dot(tempX, tempY, r);
 
@@ -230,11 +231,11 @@ function stage4grid() {
     let tempX = (tran * cos(radians(rotateVal))) + width / 2;
     let tempY = (tran * sin(radians(rotateVal))) + height / 2;
 
-    r = r + ((i / 40000) * lmax);
+    r = r + ((i / 40000) * vMax);
 
 
 
-    //  lineLayer.circle(tempX, tempY, r-(i*lmax));
+    //  lineLayer.circle(tempX, tempY, r-(i*vMax));
 
     dots[dotsCount++] = new Dot(tempX, tempY, r);
 
@@ -271,7 +272,7 @@ function stage5grid() {
 
 
 
-    //  lineLayer.circle(tempX, tempY, r-(i*lmax));
+    //  lineLayer.circle(tempX, tempY, r-(i*vMax));
 
     dots[dotsCount++] = new Dot(tempX, tempY, tempRad);
 
@@ -308,7 +309,7 @@ dotsCount = 0;
         for (let j = 0; j < dotQtyY; j++) {
         let noiseX = int((random(-width, width) * noiseAmp) / 150);
         let noiseY = int((random(-height, height) * noiseAmp) / 150);
-        let r = random((lmax*(dotSize/10)), (lmax*(dotSize/10)) * 2);
+        let r = random((vMax*(dotSize/10)), (vMax*(dotSize/10)) * 2);
         dots[dotsCount++] = new Dot(noiseX + (spaceX * 1.5) + (spaceX * i), noiseY + (spaceY * 1.5) + (spaceY * j), r);
       }
 
@@ -351,7 +352,7 @@ function nextGrid() {
 
 function draw() {
 
-  if (introState === 0) {
+  if (introState === 3) {
     image(tintedBG, 0, 0, width, height);
     image(lineLayer, 0, 0);
     image(permaLine, 0, 0);
@@ -359,25 +360,44 @@ function draw() {
       dots[i].show();
     }
   }
+  else {
+
+
+        blendMode(BLEND);
+        background(205, 12, 64, 100);
+
+
+
+        if (slide > 0) {
+
+    // DO STUFF
+        }
+
+        if (slide === 0) {
+          textLayer.text(introText[slide], width / 2, (height / 8) * (slide + 2));
+        } else {
+          textLayer.text(introText[slide - 1], width / 2, (height / 6) * (slide));
+        } // this if else statgement needs to be replaced with a better system. The current state tracking is not working
+        image(textLayer, 0, 0, width, height);
+
+  }
 
 }
 
 function touchStarted() {
 
-  if (introState === 1 && textStroke === 10) {
-    exitIntro();
-    audio.loop();
-  } else {
+  if (introState === 3)
+  {
     for (let i = 0; i < dotsCount; i++) {
       dots[i].getCol(winMouseX, winMouseY);
     }
-
-
   }
 }
 
 
 function touchMoved() {
+
+  if (introState === 3) {
 
   for (let i = 0; i < dotsCount; i++) {
     dots[i].clicked(winMouseX, winMouseY);
@@ -392,6 +412,12 @@ function touchMoved() {
     lineLayer.line(tempwinMouseX, tempwinMouseY, winMouseX, winMouseY);
   }
   return false;
+}
+
+  else {
+
+  // do stuff here
+  }
 }
 
 function copyLine() {

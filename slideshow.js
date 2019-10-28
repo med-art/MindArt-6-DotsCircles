@@ -1,23 +1,71 @@
-let textStroke = 80;
-let textStroke2 = 0;
+let introText = ["Touch", "Look", "Listen", "Touch"];
+
+let appCol = "#f1b300";
+
+let slide = 0;
+let delayTime = 8000;
+let introState = 0;
+let noiseScale=2;
+
+function mousePressed(){
 
 
-function showIntro() {
-  image(bg, 0, 0, width, height);
-  textSize(lmax * 6);
-  textAlign(CENTER);
-  text("Dotscape", width / 2, height * 0.4);
-  textSize(lmax * 4.5);
-  text("Touch the screen to begin", width / 2, height * 0.6);
-  if (textStroke > 10) {
-    fill(textStroke--, textStroke2++);
-    setTimeout(showIntro, 50);
+  if (introState < 3){
+
+
+  if (audio.isPlaying()){
+
   }
+  else {
+        audio.loop(5);
+      }
+
 }
 
-function exitIntro() {
-  writeTextUI();
-  nextGrid();
+if (slide === 0){
+  slide++;
+  slideShow();
+}
 
-  introState = 0;
+ return false;
+}
+
+function slideShow() {
+
+  if (slide === 0){
+
+
+  }
+
+  if (slide === introText.length) {
+    textLayer.clear();
+    introState = 3;
+    writeTextUI();
+    nextGrid();
+
+    //restart();
+    counter = 0;
+  }
+
+  else if (slide < introText.length) {
+
+    textLayer.clear();
+    textLayer.fill(255, 5);
+    textLayer.textSize(vMax*8);
+    textLayer.textAlign(CENTER, CENTER);
+    textLayer.rectMode(CENTER);
+    textLayer.text(introText[slide], width/2, (height/8)*(slide+2));
+
+if (slide > 0){
+
+if (slide === introText.length-1){
+  delayTime = 10000;
+}
+
+      slide++;
+      console.log(slide);
+      setTimeout(slideShow, delayTime);
+}
+
+  }
 }
