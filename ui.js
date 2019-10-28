@@ -47,7 +47,6 @@ function writeRestartUI() {
 
 function restart() {
   stage = 0;
-  introState = 0;
   dimensionCalc();
   writeTextUI();
   nextGrid();
