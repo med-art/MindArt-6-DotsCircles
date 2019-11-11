@@ -390,6 +390,7 @@ function touchStarted() {
   {
     for (let i = 0; i < dotsCount; i++) {
       dots[i].getCol(winMouseX, winMouseY);
+      dots[i].clicked(winMouseX, winMouseY);
     }
   }
 }
