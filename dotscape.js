@@ -384,6 +384,21 @@ function draw() {
 
 }
 
+function mouseClicked(){
+  if (introState === 3)
+  {
+    for (let i = 0; i < dotsCount; i++) {
+      dots[i].getCol(winMouseX, winMouseY);
+      dots[i].clicked(winMouseX, winMouseY);
+    }
+  }
+}
+
+function mouseReleased(){
+  lineLayer.clear();
+  throughDotCount = 0;
+}
+
 function touchStarted() {
 
   if (introState === 3)
@@ -396,12 +411,15 @@ function touchStarted() {
 }
 
 
+
+
 function touchMoved() {
 
   if (introState === 3) {
 
   for (let i = 0; i < dotsCount; i++) {
     dots[i].clicked(winMouseX, winMouseY);
+
   }
   hueDrift = int(random(-2, 2));
   satDrift = int(random(-2, 2));
@@ -473,13 +491,14 @@ class Dot {
     let d = dist(x, y, this.x, this.y);
 
     if (throughDotCount === 0){
-      rMultiplier = 4; // increase radius for first grab
+      rMultiplier = 1.2; // increase radius for first grab
     }
     else {
       rMultiplier = 1;
     }
 
-    if (d < this.r * 2.05 * rMultiplier && (this.x != verifyX || this.y != verifyY)) {
+    if (d < this.r * 2.05* rMultiplier && (this.x != verifyX || this.y != verifyY)) {
+
       verifyX = this.x;
       verifyY = this.y;
       tempwinMouseX2 = tempwinMouseX;

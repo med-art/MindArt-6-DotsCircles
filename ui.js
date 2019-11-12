@@ -12,18 +12,18 @@ function writeTextUI() {
   colH3 = color(240, 0, 50);
   colH1 = color(355, 0, 20);
 
-  nextButton = createButton('Next');
-  nextButton.style('font-size', '2.6vmax');
-  nextButton.style('height', '4.5vmax');
-  nextButton.position(width - (15 * vMax), height - (6.5 * vMax));
+  nextButton = createButton("Suivant")
   nextButton.class("select");
+  nextButton.position(width - (16 * vMax), height - (7 * vMax));
+  nextButton.style('font-size', '1.7vmax');
+  nextButton.style('height', '5vmax');
   nextButton.mousePressed(nextGrid);
 
-  saveButton = createButton('Save');
-  saveButton.style('font-size', '2.6vmax');
-  saveButton.style('height', '4.5vmax');
-  saveButton.position(width - (15 * vMax), height - (12.5 * vMax));
+  saveButton = createButton("Sauvegardez")
   saveButton.class("select");
+  saveButton.style('font-size', '1.7vmax');
+  saveButton.style('height', '5vmax');
+  saveButton.position(width - (16 * vMax), height - (13 * vMax));
   saveButton.mousePressed(saveImage);
 }
 
@@ -35,13 +35,15 @@ function writeRestartUI() {
   noStroke();
 
   nextButton.remove();
-  nextButton = createButton('Restart');
-  nextButton.style('font-size', '2.6vmax');
-  nextButton.style('height', '4.5vmax');
-  nextButton.position(width - (15 * vMax), height - (6.5 * vMax));
+  nextButton = createButton("Recommencez")
   nextButton.class("select");
+  nextButton.position(width - (16 * vMax), height - (7 * vMax));
+  nextButton.style('font-size', '1.5vmax');
+  nextButton.style('height', '5vmax');
   nextButton.style('background-color', 'indianred');
-  nextButton.mousePressed(restart);
+  nextButton.mousePressed(nextGrid);
+
+
 }
 
 
