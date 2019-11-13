@@ -31,12 +31,13 @@ function slideShow() {
 
   if (slide === introText.length) {
     textLayer.clear();
-    introState = 3;
+
     writeTextUI();
     nextGrid();
     //restart();
     counter = 0;
     slide = 4;
+      introState = 3;
   }
 
   else if (slide < introText.length && slide > 0) {

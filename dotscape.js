@@ -28,6 +28,7 @@ let xintro = [];
 let yintro = [];
 let tempxintro;
 let tempyintro;
+let direction = 0;
 
 
 
@@ -52,12 +53,14 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 100);
   lineLayer.colorMode(HSB, 360, 100, 100, 100);
   permaLine.colorMode(HSB, 360, 100, 100, 100);
+
   dimensionCalc();
   textLayer = createGraphics(windowWidth, windowHeight);
   introLayer = createGraphics(windowWidth, windowHeight);
-  introLayer.stroke(255);
+    introLayer.colorMode(HSB);
+  introLayer.stroke(0, 0, 85);
   introLayer.strokeWeight(7);
-  introLayer.fill(255);
+  introLayer.fill(0, 0, 85);
   slide = 0;
   slideShow();
   makeintroDots();
@@ -339,6 +342,7 @@ dotsCount = 0;
 
 
 function nextGrid() {
+
       click.play();
   permaLine.clear();
 
@@ -384,7 +388,11 @@ function draw() {
 
 
         if (slide > 0) {
-    image(introLayer, 0, 0, width, height);
+
+    stroke(150);
+    strokeWeight(7);
+    line(xintro[throughDotCount-1], yintro[throughDotCount-1], mouseX, mouseY);
+      image(introLayer, 0, 0, width, height);
         }
 
         if (slide === 0) {
@@ -409,10 +417,15 @@ function mouseClicked(){
 
 }
 
-function mouseReleased(){
-  lineLayer.clear();
+ function mouseReleased(){
+  if (slide > 0){
+
+
+  introLayer.clear();
   throughDotCount = 0;
-  }
+  makeintroDots();
+}
+   }
 
 function touchStarted() {
 
@@ -427,11 +440,9 @@ function touchStarted() {
 }
 
 function makeintroDots() {
-  for (let i = 0; i < 2; i++){
-    xintro[i] = int(random(width/6, width-(width/6)));
-    yintro[i] = int(random(height/6, height-(height/6)));
-      introLayer.ellipse(xintro[i], yintro[i], 40, 40);
-      }
+    xintro[0] = int(random(width/10, width-(width/10)));
+    yintro[0] = int(height/2);
+    introLayer.ellipse(xintro[0], yintro[0], 40, 40);
 }
 
 
@@ -453,37 +464,54 @@ function touchMoved() {
     lineLayer.line(tempwinMouseX, tempwinMouseY, winMouseX, winMouseY);
   }
 
+
 }
 
   else {
 
-    introLayer.clear();
+    //introLayer.clear();
 
-    for (let i = 0; i < 2; i++){
-      introLayer.ellipse(xintro[i], yintro[i], 40, 40);
 
-      if (dist(mouseX, mouseY, xintro[i], yintro[i]) < 30){
+      introLayer.ellipse(xintro[throughDotCount], yintro[throughDotCount], 40, 40);
 
-        if (tempxintro === xintro[i]){
-          throughDotCount = 0
+
+      if (dist(mouseX, mouseY, xintro[throughDotCount], yintro[throughDotCount]) < 30){
+
+        let _x = xintro[throughDotCount]+random(-200,200);
+        let y;
+
+        if (direction){
+        _y = yintro[throughDotCount]+random(20,99);
+        console.log("now");
+      } else if (!direction) {
+          console.log("now");
+        _y = yintro[throughDotCount]-random(20,99);
+      }
+
+        if (_x < 100){
+          _x = _x + width/2;
         }
-          throughDotCount++;
-        tempxintro = xintro[i];
-        tempyintro = yintro[i];
+        if (_x > width-100){
+          _x = _x - width/2
+        }
+        if (_y < 100){
+          direction = !direction;
+        }
+        if (_y > height-100){
+          direction = !direction;
+        }
+
+
+
+      xintro.push(_x);
+      yintro.push(_y);
+      throughDotCount++;
+
+      if (throughDotCount > 1){
+
+        introLayer.background(205, 12, 64, 0.1);
+        introLayer.line(xintro[throughDotCount-2], yintro[throughDotCount-2], xintro[throughDotCount-1], yintro[throughDotCount-1]);
       }
-
-      if (throughDotCount === 1){
-        introLayer.line(mouseX, mouseY, tempxintro, tempyintro);
-      }
-
-      if (throughDotCount === 2){
-        introLayer.clear();
-        makeintroDots();
-        throughDotCount = 0;
-
-      }
-
-
 
     }
 
