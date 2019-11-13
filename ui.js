@@ -56,6 +56,7 @@ function restart() {
 }
 
 function saveImage() {
+      click.play();
   save('dotscape' + month() + day() + hour() + second() + '.jpg');
 }
 

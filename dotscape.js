@@ -22,6 +22,13 @@ let verifyY = 0;
 let tintedBG;
 
 let rMultiplier = 1;
+let click;
+
+let xintro = [];
+let yintro = [];
+let tempxintro;
+let tempyintro;
+
 
 
 let stage1array = [
@@ -33,6 +40,7 @@ let stage1array = [
 function preload() {
   bg = loadImage('assets/paper.jpg');
   audio = loadSound('assets/audio.mp3');
+    click = loadSound('assets/click.mp3');
 }
 
 function setup() {
@@ -45,9 +53,17 @@ function setup() {
   lineLayer.colorMode(HSB, 360, 100, 100, 100);
   permaLine.colorMode(HSB, 360, 100, 100, 100);
   dimensionCalc();
-
   textLayer = createGraphics(windowWidth, windowHeight);
+  introLayer = createGraphics(windowWidth, windowHeight);
+  introLayer.stroke(255);
+  introLayer.strokeWeight(10);
+  introLayer.fill(200);
+  slide = 0;
   slideShow();
+
+  makeintroDots();
+
+
 }
 
 function dimensionCalc() {
@@ -324,6 +340,7 @@ dotsCount = 0;
 
 
 function nextGrid() {
+      click.play();
   permaLine.clear();
 
   if (stage < 3) {
@@ -367,14 +384,12 @@ function draw() {
         background(205, 12, 64, 100);
 
 
-
         if (slide > 0) {
-
-    // DO STUFF
+    image(introLayer, 0, 0, width, height);
         }
 
         if (slide === 0) {
-          textLayer.text(introText[slide], width / 2, (height / 8) * (slide + 2));
+
         } else {
           textLayer.text(introText[slide - 1], width / 2, (height / 6) * (slide));
         } // this if else statgement needs to be replaced with a better system. The current state tracking is not working
@@ -410,7 +425,13 @@ function touchStarted() {
   }
 }
 
-
+function makeintroDots() {
+  for (let i = 0; i < 2; i++){
+    xintro[i] = int(random(width/6, width-(width/6)));
+    yintro[i] = int(random(height/6, height-(height/6)));
+      introLayer.ellipse(xintro[i], yintro[i], 40, 40);
+      }
+}
 
 
 function touchMoved() {
@@ -435,6 +456,39 @@ function touchMoved() {
 
   else {
 
+    introLayer.clear();
+
+    for (let i = 0; i < 2; i++){
+      introLayer.ellipse(xintro[i], yintro[i], 40, 40);
+
+      if (dist(mouseX, mouseY, xintro[i], yintro[i]) < 30){
+
+        if (tempxintro === xintro[i]){
+          throughDotCount = 0
+        }
+          throughDotCount++;
+        tempxintro = xintro[i];
+        tempyintro = yintro[i];
+      }
+
+      if (throughDotCount === 1){
+        introLayer.line(mouseX, mouseY, tempxintro, tempyintro);
+      }
+
+      if (throughDotCount === 2){
+        introLayer.clear();
+        makeintroDots();
+        throughDotCount = 0;
+
+      }
+
+
+    }
+
+
+
+  //  if (dist(mouseX, mouseY, xintro[0], yintro[0]) < 40)
+  // image(introLayer, 0, 0, width, height);
   // do stuff here
   }
 }
