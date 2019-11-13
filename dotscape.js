@@ -484,8 +484,8 @@ function touchMoved() {
       }
 
 
-return false;
-    }
+
+
 
 
 
@@ -493,6 +493,7 @@ return false;
   // image(introLayer, 0, 0, width, height);
   // do stuff here
   }
+  return false;
 }
 
 function copyLine() {
