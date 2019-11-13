@@ -423,7 +423,7 @@ function touchStarted() {
       dots[i].clicked(winMouseX, winMouseY);
     }
   }
-  return false;
+
 }
 
 function makeintroDots() {
