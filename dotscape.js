@@ -407,11 +407,13 @@ function mouseClicked(){
       dots[i].clicked(winMouseX, winMouseY);
     }
   }
+  return false;
 }
 
 function mouseReleased(){
   lineLayer.clear();
   throughDotCount = 0;
+  return false;
 }
 
 function touchStarted() {
