@@ -60,7 +60,6 @@ function setup() {
   introLayer.fill(255);
   slide = 0;
   slideShow();
-
   makeintroDots();
 
 
@@ -407,14 +406,13 @@ function mouseClicked(){
       dots[i].clicked(winMouseX, winMouseY);
     }
   }
-  return false;
+
 }
 
 function mouseReleased(){
   lineLayer.clear();
   throughDotCount = 0;
-  return false;
-}
+  }
 
 function touchStarted() {
 
@@ -425,6 +423,7 @@ function touchStarted() {
       dots[i].clicked(winMouseX, winMouseY);
     }
   }
+  return false;
 }
 
 function makeintroDots() {
@@ -453,7 +452,7 @@ function touchMoved() {
   if (throughDotCount > 0) {
     lineLayer.line(tempwinMouseX, tempwinMouseY, winMouseX, winMouseY);
   }
-  return false;
+
 }
 
   else {
@@ -485,6 +484,7 @@ function touchMoved() {
       }
 
 
+return false;
     }
 
 
