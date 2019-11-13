@@ -56,8 +56,8 @@ function setup() {
   textLayer = createGraphics(windowWidth, windowHeight);
   introLayer = createGraphics(windowWidth, windowHeight);
   introLayer.stroke(255);
-  introLayer.strokeWeight(10);
-  introLayer.fill(200);
+  introLayer.strokeWeight(7);
+  introLayer.fill(255);
   slide = 0;
   slideShow();
 
