@@ -60,6 +60,28 @@ function setup() {
   makeintroDots();
 }
 
+function windowResized() {
+
+  resizeCanvas(windowWidth, windowHeight);
+  introLayer.resizeCanvas(windowWidth, windowHeight);
+  textLayer.resizeCanvas(windowWidth, windowHeight);
+  lineLayer.resizeCanvas(windowWidth, windowHeight);
+  permaLine.resizeCanvas(windowWidth, windowHeight);
+  tintedBG.resizeCanvas(windowWidth,windowHeight);
+  dimensionCalc();
+  if (introState === 3){
+   removeElements();
+   writeTextUI();
+   stage--;
+   nextGrid();
+
+
+ } else if (introState < 3 && slide > 0){
+   makeintroDots();
+ }
+
+}
+
 function dimensionCalc() {
   wmax = width / 100;
   hmax = height / 100;
@@ -260,6 +282,8 @@ function nextGrid() {
   throughDotCount = 0;
   click.play();
   permaLine.clear();
+  lineLayer.clear();
+
   if (stage < 3) {
     stage0grid();
   } else if (stage >= 3 && stage < 6) {
