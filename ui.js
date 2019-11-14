@@ -41,7 +41,7 @@ function writeRestartUI() {
   nextButton.style('font-size', '1.5vmax');
   nextButton.style('height', '5vmax');
   nextButton.style('background-color', 'indianred');
-  nextButton.mousePressed(nextGrid);
+  nextButton.mousePressed(restart);
 
 
 }
