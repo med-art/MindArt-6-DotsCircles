@@ -38,8 +38,7 @@ function slideShow() {
     counter = 0;
     slide = 4;
       introState = 3;
-      touchStarted();
-        touchMoved();
+
   }
 
   else if (slide < introText.length && slide > 0) {

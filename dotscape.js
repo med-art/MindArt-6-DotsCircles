@@ -339,7 +339,7 @@ function mouseClicked() {
   }
 }
 
-function mouseReleased() {
+function touchEnded() {
   if (slide > 0) {
     introLayer.clear();
     throughDotCount = 0;
