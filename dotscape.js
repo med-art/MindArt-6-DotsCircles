@@ -322,7 +322,7 @@ function draw() {
       strokeWeight(7);
       line(xintro[throughDotCount - 1], yintro[throughDotCount - 1], mouseX, mouseY);
       image(introLayer, 0, 0, width, height);
-    }
+      }
     if (slide === 0) {} else {
       textLayer.text(introText[slide - 1], width / 2, (height / 6) * (slide));
     } // this if else statgement needs to be replaced with a better system. The current state tracking is not working
@@ -342,9 +342,12 @@ function mouseClicked() {
 function touchEnded() {
   if (slide > 0) {
     introLayer.clear();
-    throughDotCount = 0;
+
     makeintroDots();
-  }
+    }
+
+    lineLayer.clear();
+    throughDotCount = 0;
 }
 
 function touchStarted() {
@@ -424,10 +427,7 @@ function copyLine() {
   }
 }
 
-function touchEnded() {
-  lineLayer.clear();
-  throughDotCount = 0;
-}
+
 class Dot {
   constructor(x, y, r) {
     this.x = x;
